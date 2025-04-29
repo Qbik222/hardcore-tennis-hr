@@ -9,14 +9,20 @@ $font-suisse-intl-reg: SuisseIntl-Regular, sans-serif
 $font-suisse-intl-bold: SuisseIntl-Bold, sans-serif
 $font-favbet-text-reg: FavbetText-Regular, sans-serif
 $font-favbet-text-bold: FavbetText-Bold, sans-serif
-$font-handjet-bold: Handjet-Bold, sans-serif
-$font-handjet-black: Handjet-Black, sans-serif
+$font-press-start2p: PressStart2P, sans-serif
+
+//$font-handjet-bold: Handjet-Bold, sans-serif
+//$font-handjet-black: Handjet-Black, sans-serif
 
 .hide
   display: none !important
 
 picture, img
   display: block !important
+  &.hr
+    display: block !important
+  &.en
+    display: none !important
 
 body.light
   background: $blue
@@ -27,11 +33,6 @@ picture.light
 picture.dark
   display: none
 
-picture.hr
-  display: block
-
-picture.en
-  display: none
 
 body
   overscroll-behavior: none
@@ -43,12 +44,61 @@ body
   & > *
     font-family: inherit
 
+.title
+  color: $white
+  font-family: $font-press-start2p
+  text-transform: uppercase
+
 .fav-page
   background: $blue
   display: flex
   flex-direction: column
   align-items: center
   overflow: hidden
+
+
+.btn
+  font-family: $font-press-start2p
+  font-size: 28px
+  line-height: 28px
+  color: $blue
+  min-width: 245px
+  max-width: fit-content
+  text-transform: uppercase
+  letter-spacing: .01em
+  height: 59px
+  padding: 10px
+  display: flex
+  align-items: center
+  justify-content: center
+  filter: drop-shadow(0px 0px 25px rgba(5, 196, 138, 0.50))
+  background: url("../img/btn.png") no-repeat 0 0/cover
+  background-size: 100% 100%
+
+.welcome
+  display: flex
+  align-items: center
+  &__left
+    display: flex
+    flex-direction: column
+  &__right
+    width: 50%
+    height: 100%
+    background: $white
+  &__title
+    font-size: 92px
+    line-height: 92px
+    letter-spacing: 0.01em
+    text-shadow: -1px -1px 0px #FF267E, 0px 0px 28px #FF267E, 5px 5px 0px #FF267E
+  &__subtitle
+    font-size: 44px
+    line-height: 44px
+    color: $white
+    font-family: $font-press-start2p
+    text-shadow: 1px $white
+    text-transform: uppercase
+    letter-spacing: .1em
+
 
 
 // drop
@@ -150,11 +200,12 @@ details summary::-webkit-details-marker
 //en
 
 .fav-page.en
-  picture.hr
-    display: none
-
-  picture.en
-    display: block
+  picture, img
+    display: block !important
+    &.hr
+      display: none !important
+    &.en
+      display: block !important
 
 // dark
 body.dark

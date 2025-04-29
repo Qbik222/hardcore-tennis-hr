@@ -8,12 +8,12 @@
         redirectBtns = document.querySelectorAll('.play-btn'),
         loader = document.querySelector(".spinner-overlay")
 
-    const hrLeng = document.querySelector('#ukLeng');
+    const hrLeng = document.querySelector('#hrLeng');
     const enLeng = document.querySelector('#enLeng');
 
     let locale = "en"
 
-    if (ukLeng) locale = 'hr';
+    if (hrLeng) locale = 'hr';
     if (enLeng) locale = 'en';
 
     let debug = true
@@ -81,8 +81,6 @@
         const waitForUserId = new Promise((resolve) => {
             const interval = setInterval(() => {
                 tryDetectUserId();
-                if(userId) quickCheckAndRender();
-
                 if (userId || attempts >= maxAttempts) {
                     quickCheckAndRender();
                     clearInterval(interval);
@@ -134,8 +132,8 @@
                         hideLoader()
                     })
             } else {
-                for (const info of choseCardsInfo) {
-                    info.classList.add('hide');
+                for (let redirectBtn of redirectBtns) {
+                    redirectBtn.classList.add('hide');
                 }
                 for (let participateBtn of participateBtns) {
                     participateBtn.classList.add('hide');
@@ -204,5 +202,7 @@
         }
         return i18nData[key] || defaultVal || '*----NEED TO BE TRANSLATED----*   key:  ' + key;
     }
+
+    checkUserAuth()
 
 })();
