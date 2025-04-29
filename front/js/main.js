@@ -5,15 +5,15 @@
     const mainPage = document.querySelector(".fav-page"),
         unauthMsgs = document.querySelectorAll('.unauth-msg'),
         participateBtns = document.querySelectorAll('.part-btn'),
-        redirectBtns = document.querySelectorAll('.btn-join'),
+        redirectBtns = document.querySelectorAll('.play-btn'),
         loader = document.querySelector(".spinner-overlay")
 
-    const ukLeng = document.querySelector('#ukLeng');
+    const hrLeng = document.querySelector('#ukLeng');
     const enLeng = document.querySelector('#enLeng');
 
     let locale = "en"
 
-    if (ukLeng) locale = 'uk';
+    if (ukLeng) locale = 'hr';
     if (enLeng) locale = 'en';
 
     let debug = true

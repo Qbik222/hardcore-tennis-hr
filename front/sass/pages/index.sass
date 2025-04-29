@@ -7,6 +7,10 @@ $grey: #AEAEAE
 
 $font-suisse-intl-reg: SuisseIntl-Regular, sans-serif
 $font-suisse-intl-bold: SuisseIntl-Bold, sans-serif
+$font-favbet-text-reg: FavbetText-Regular, sans-serif
+$font-favbet-text-bold: FavbetText-Bold, sans-serif
+$font-handjet-bold: Handjet-Bold, sans-serif
+$font-handjet-black: Handjet-Black, sans-serif
 
 .hide
   display: none !important
@@ -21,6 +25,12 @@ picture.light
   display: block
 
 picture.dark
+  display: none
+
+picture.hr
+  display: block
+
+picture.en
   display: none
 
 body
@@ -39,6 +49,112 @@ body
   flex-direction: column
   align-items: center
   overflow: hidden
+
+
+// drop
+details summary::-webkit-details-marker
+  display: none
+
+.drop
+  max-width: 100%
+  width: 100%
+  margin: 0 auto
+  border-radius: 10px
+  position: relative
+  z-index: 5
+  &__bottom-text
+    color: $white
+    font-size: 10px
+    line-height: 16px
+    font-family: $font-suisse-intl-reg
+    opacity: .9
+    text-align: center
+    margin-bottom: 15px
+  .dropdown[open] summary::before
+    transform:  rotate(180deg)
+  summary
+    list-style: none
+    padding: 15px
+    font-family: $font-suisse-intl-reg
+    font-size: 16px
+    cursor: pointer
+    border: 2px solid $white
+    background: rgba($black, .3)
+    display: flex
+    align-items: center
+    justify-content: space-between
+    color: $white
+    @media screen and (max-width: 600px)
+      font-size: 14px
+      line-height: 22px
+    &::before
+      content: ""
+      display: block
+      min-width: 25px
+      height: 25px
+      background: url("../img/arrow-drop.png") no-repeat 0 0/contain
+      order: 2
+
+  &-txt
+    padding: 15px
+    background: rgba($black, .3)
+    margin-top: 10px
+    max-height: 350px
+    overflow-y: auto
+    border: 2px solid $white
+    scrollbar-width: auto
+    &::-webkit-scrollbar-thumb
+      background: $green
+      width: 3px
+      border-radius: 3px
+    &::-webkit-scrollbar
+      background: $white
+      width: 3px
+    &-list
+      display: flex
+      flex-direction: column
+      gap: 15px
+      p, strong, a
+        font-size: 16px
+        line-height: 26px
+        font-family: $font-suisse-intl-reg
+        color: $white
+        @media screen and (max-width: 600px)
+          font-size: 14px
+          line-height: 22px
+      span
+        font-family: $font-suisse-intl-reg
+        display: block
+      tr,td
+        font-family: $font-suisse-intl-reg
+      td
+        padding-left: 5px
+
+
+.retreat1
+  padding-left: 30px
+  strong
+    font-family: $font-suisse-intl-bold
+    color: $white
+.circle
+  padding-left: 35px
+  &:before
+    content: ''
+    width: 5px
+    height: 5px
+    background: $white
+    border-radius: 50%
+    display: inline-block
+    margin: 0 4px 2px 0
+
+//en
+
+.fav-page.en
+  picture.hr
+    display: none
+
+  picture.en
+    display: block
 
 // dark
 body.dark

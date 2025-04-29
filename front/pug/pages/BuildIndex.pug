@@ -1,3 +1,178 @@
 .fav-page.loading
     .spinner-overlay
         .spinner
+    .welcome
+        .welcome__left
+            .welcome__title.title(data-translate="welcomeTitle") Nagradni fond 5000 €
+            .welcome__subtitle(data-translate="welcomeSubtitle") Totalni tenis
+            .welcome__btn.btn.unauth-msg(data-translate="signBtn") Prijavi se
+            .welcome__btn.btn.part-btn(data-translate="partBtn") Sudjeluj
+            .welcome__btn.btn.play-btn(data-translate="playBtn") Kladi se
+        .welcome__right
+            .welcome__animation
+    .info
+        .info__left
+            .info__coin
+            .info__coin
+            picture
+                source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/info/box-mob.png")
+                source(media="(max-width: 950px) and (orientation: landscape) and (max-height: 450px)" srcset="img/info/box-mob.png")
+                source(media="(min-width: 601px) and (max-width: 1050px) and (orientation: portrait)" srcset="img/info/box-mob.png")
+                source(media="(max-width: 1050px) and (orientation: landscape) and (max-height: 800px)" srcset="img/info/box-mob.png")
+                source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/info/box-desc.png")
+                img(src="img/info/box-desc.png" alt="Favbet" )
+            .info__coin
+            .info__coin
+        .info__right
+            .info__title(data-translate="infoTitle") Dobro došao u Totalni tenis.
+            .info__text(data-translate="infoText") Doživi strast i napetost Roland Garrosa kao nikada prije! Od 25. svibnja do 8. lipnja 2025. priključi se spektaklu i kladi se na najuzbudljivije mečeve pariškog Grand Slama. Uz minimalnu okladu od samo 5 € skupljaj bodove i natječi se za dio FAVBET nagradnog fonda od 5000 €.
+            .info__icons
+                .info__icons-item
+                    img(src="img/info/basketball.png" alt="favbet")
+                .info__icons-item
+                    img(src="img/info/tennis.png" alt="favbet")
+                .info__icons-item
+                    img(src="img/info/football.png" alt="favbet")
+                .info__icons-item
+                    img(src="img/info/volleyball.png" alt="favbet")
+                .info__icons-item.info__icons-cup
+                    img(src="img/info/cup.png" alt="favbet")
+            .info__bottom(data-translate="infoBottom") Više bodova – veće šanse za nagradu!
+            .info__btn.btn.unauth-msg(data-translate="signBtn") Prijavi se
+            .info__btn.btn.part-btn(data-translate="partBtn") Sudjeluj
+            .info__btn.btn.play-btn(data-translate="playBtn") Kladi se
+    .guide
+        .guide__title.title(data-translate="guideTitle") KAKO SUDJELOVATI?
+        .guide__list
+            .guide__list-item
+                .guide__arrow
+                    img(src="img/guide/arrow-right/png" alt="favbet")
+                .guide__step
+                    .guide__step-icon
+                        img(src="img/guide/pointer/png" alt="favbet")
+                    .guide__step-text(data-translate="stepText1") Klikni gumb “Sudjeluj”
+                    .guide__step-tag(data-translate="stepTag1") Korak 1
+            .guide__list-item
+                .guide__step
+                    .guide__step-icon
+                        img(src="img/guide/gamepad/png" alt="favbet")
+                    .guide__step-text(data-translate="stepText2") Kladi se na Roland Garros
+                    .guide__step-tag(data-translate="stepTag2") Korak 2
+                .guide__arrow
+                    img(src="img/guide/arrow-left/png" alt="favbet")
+            .guide__list-item
+                .guide__step
+                    .guide__step-icon
+                        img(src="img/guide/coin/png" alt="favbet")
+                    .guide__step-text(data-translate="stepText3") Osvoji bodove i nagrade
+                    .guide__step-tag(data-translate="stepTag3") Korak 3
+    .drop
+        details.dropdown
+            summary(data-translate="detailsBtn") Detalji
+            .drop-txt
+                .drop-txt-list(data-translate="details")
+                    p 1. Klikni gumb “Sudjeluj” Prijavi se na svoj Favbet račun ili se registriraj ako si novi igrač. Klikni gumb “Sudjeluj” na stranici promocije.
+                    p 2. Kladi se na Roland Garros Od 25. svibnja do 8. lipnja 2025. kladi se na mečeve Roland Garrosa s minimalnim iznosom od 5 € i za svakih 5 € osvoji 1 bod. Oklade moraju biti obračunate s minimalnim tečajem 1.5 (pojedinačne) ili za kombinirane oklade s ukupnim minimalnim tečajem 3.5 (minimalno 3 događaja), bez korištenja opcija „Bez rizika“ i „Povrat”.
+                    p 3. Osvoji bodove i nagrade Više bodova donosi veće šanse za osvajanje. Bodovi će se prikupljati i prikazivati u tablici „Rezultati“. Nakon završetka promocije, prvih 30 sudionika s najviše bodova osvaja vrijedne nagrade.
+    .results
+        .results__title.title(data-translate="resultsTitle")
+        .table
+            .table__head
+                .table__row
+                    .table__row-item(data-translate="tablePlace") [ MJESTO ]
+                    .table__row-item(data-translate="tableId") [ ID ]
+                    .table__row-item(data-translate="tablePoints") [ BODOVI ]
+                    .table__row-item(data-translate="tablePrize") [ NAGRADA ]
+            .table__body#table
+                .table__row
+                    .table__row-item 01
+                    .table__row-item 4538***
+                    .table__row-item 32.9
+                    .table__row-item 350 € #[span.table-coin]
+                .table__row
+                    .table__row-item 02
+                    .table__row-item 4538***
+                    .table__row-item 32.9
+                    .table__row-item 350 € #[span.table-coin]
+                .table__row
+                    .table__row-item 03
+                    .table__row-item 4538***
+                    .table__row-item 32.9
+                    .table__row-item 350 € #[span.table-coin]
+                .table__row
+                    .table__row-item 04
+                    .table__row-item 4538***
+                    .table__row-item 32.9
+                    .table__row-item 350 € #[span.table-coin]
+                .table__row
+                    .table__row-item 05
+                    .table__row-item 4538***
+                    .table__row-item 32.9
+                    .table__row-item 350 € #[span.table-coin]
+                .table__row
+                    .table__row-item 06
+                    .table__row-item 4538***
+                    .table__row-item 32.9
+                    .table__row-item 350 € #[span.table-coin]
+                .table__row
+                    .table__row-item 07
+                    .table__row-item 4538***
+                    .table__row-item 32.9
+                    .table__row-item 350 € #[span.table-coin]
+                .table__row
+                    .table__row-item 08
+                    .table__row-item 4538***
+                    .table__row-item 32.9
+                    .table__row-item 350 € #[span.table-coin]
+                .table__row
+                    .table__row-item 09
+                    .table__row-item 4538***
+                    .table__row-item 32.9
+                    .table__row-item 350 € #[span.table-coin]
+                .table__row
+                    .table__row-item 10
+                    .table__row-item 4538***
+                    .table__row-item 32.9
+                    .table__row-item 350 € #[span.table-coin]
+            .table__body#tableOther
+                .table__row
+                    .table__row-item 38
+                    .table__row-item 4538***
+                    .table__row-item 32.9
+                    .table__row-item 350 € #[span.table-coin]
+                .table__row
+                    .table__row-item 39 #[span.you(data-translate="you") ti]
+                    .table__row-item 4538***
+                    .table__row-item 32.9
+                    .table__row-item 350 € #[span.table-coin]
+                .table__row
+                    .table__row-item 40
+                    .table__row-item 4538***
+                    .table__row-item 32.9
+                    .table__row-item 350 € #[span.table-coin]
+        .results__btn.btn.unauth-msg(data-translate="signBtn") Prijavi se
+        .results__btn.btn.part-btn(data-translate="partBtn") Sudjeluj
+        .results__btn.btn.play-btn(data-translate="playBtn") Kladi se
+    .drop
+        details.dropdown
+            summary(data-translate="rulseBtn") Detalji
+            .drop-txt
+                .drop-txt-list(data-translate="rules")
+                    p 1. Klikni gumb “Sudjeluj” Prijavi se na svoj Favbet račun ili se registriraj ako si novi igrač. Klikni gumb “Sudjeluj” na stranici promocije.
+                    p 2. Kladi se na Roland Garros Od 25. svibnja do 8. lipnja 2025. kladi se na mečeve Roland Garrosa s minimalnim iznosom od 5 € i za svakih 5 € osvoji 1 bod. Oklade moraju biti obračunate s minimalnim tečajem 1.5 (pojedinačne) ili za kombinirane oklade s ukupnim minimalnim tečajem 3.5 (minimalno 3 događaja), bez korištenja opcija „Bez rizika“ i „Povrat”.
+                    p 3. Osvoji bodove i nagrade Više bodova donosi veće šanse za osvajanje. Bodovi će se prikupljati i prikazivati u tablici „Rezultati“. Nakon završetka promocije, prvih 30 sudionika s najviše bodova osvaja vrijedne nagrade.
+    .bottom
+        picture.uk
+            source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/bottom-mob.png")
+            source(media="(max-width: 950px) and (orientation: landscape) and (max-height: 450px)" srcset="img/bottom-mob.png")
+            source(media="(min-width: 601px) and (max-width: 1050px) and (orientation: portrait)" srcset="img/bottom-mob.png")
+            source(media="(max-width: 1050px) and (orientation: landscape) and (max-height: 800px)" srcset="img/bottom-mob.png")
+            source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/bottom-desc.png")
+            img(src="img/bottom-desc.png" alt="Favbet" )
+        picture.en
+            source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/bottom-mob.png")
+            source(media="(max-width: 950px) and (orientation: landscape) and (max-height: 450px)" srcset="img/bottom-mob.png")
+            source(media="(min-width: 601px) and (max-width: 1050px) and (orientation: portrait)" srcset="img/bottom-mob.png")
+            source(media="(max-width: 1050px) and (orientation: landscape) and (max-height: 800px)" srcset="img/bottom-mob.png")
+            source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/bottom-desc.png")
+            img(src="img/bottom-desc.png" alt="Favbet" )
