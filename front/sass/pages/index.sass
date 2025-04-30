@@ -2,8 +2,9 @@ $blue: #000055
 $white: #ffffff
 $magenta: #FF267E
 $green: #05C48A
-$black: #1B1B1F
+$black: #000000
 $grey: #AEAEAE
+$light-bg: #000022
 
 $font-suisse-intl-reg: SuisseIntl-Regular, sans-serif
 $font-suisse-intl-bold: SuisseIntl-Bold, sans-serif
@@ -37,7 +38,7 @@ picture.dark
 body
   overscroll-behavior: none
   -webkit-tap-highlight-color: transparent
-  background: $blue
+  background: $light-bg
   img
     max-width: 100%
     height: auto
@@ -50,17 +51,18 @@ body
   text-transform: uppercase
 
 .fav-page
-  background: $blue
+  background: $light-bg
   display: flex
   flex-direction: column
   align-items: center
   overflow: hidden
+  padding: 40px 0
 
 
 .btn
   font-family: $font-press-start2p
-  font-size: 28px
-  line-height: 28px
+  font-size: 14px
+  line-height: 14px
   color: $blue
   min-width: 245px
   max-width: fit-content
@@ -77,36 +79,439 @@ body
 
 .welcome
   display: flex
-  align-items: center
+  align-items: flex-start
+  width: 100%
+  max-width: 1050px
+  justify-content: space-between
+  position: relative
+  &::after
+    content: ""
+    min-width: 1370px
+    max-width: 1370px
+    height: 770px
+    display: block
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+    z-index: 0
+    pointer-events: none
+    background: url("../img/welcome/bg-dots.png") no-repeat 0 0/contain
+    @media screen and (max-width: 1050px)
+      min-width: 770px
+      max-width: 770px
+      height: 450px
+    @media screen and (max-width: 600px)
+      min-width: 435px
+      max-width: 435px
+      height: 560px
+  &::before
+    content: ""
+    display: block
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+    z-index: 0
+    pointer-events: none
+    min-width: 1370px
+    max-width: 1370px
+    height: 770px
+    animation: opacity 2.7s ease-in-out
+    background: url("../img/welcome/bg-desc.jpg") no-repeat 0 0/contain
+    @media screen and (max-width: 1050px)
+      min-width: 770px
+      max-width: 770px
+      height: 450px
+      background: url("../img/welcome/bg-tab.jpg") no-repeat 0 0/contain
+    @media screen and (max-width: 600px)
+      min-width: 435px
+      max-width: 435px
+      height: 560px
+      background: url("../img/welcome/bg-mob.jpg") no-repeat 0 0/contain
   &__left
     display: flex
     flex-direction: column
+    max-width: 470px
+    z-index: 1
+    margin-top: 65px
   &__right
-    width: 50%
-    height: 100%
-    background: $white
+    width: fit-content
+    height: fit-content
+    z-index: 1
   &__title
-    font-size: 92px
-    line-height: 92px
-    letter-spacing: 0.01em
+    font-size: 42px
+    line-height: 51px
+    letter-spacing: -0.05em
     text-shadow: -1px -1px 0px #FF267E, 0px 0px 28px #FF267E, 5px 5px 0px #FF267E
   &__subtitle
-    font-size: 44px
-    line-height: 44px
+    font-size: 28px
+    line-height: 28px
     color: $white
     font-family: $font-press-start2p
     text-shadow: 1px $white
     text-transform: uppercase
-    letter-spacing: .1em
+    letter-spacing: -0.05em
+    margin-top: 30px
+  &__btn
+    margin-top: 30px
 
 
+.info
+  z-index: 2
+  display: flex
+  align-items: flex-start
+  justify-content: space-between
+  width: 100%
+  max-width: 1040px
+  padding: 70px 40px 50px 70px
+  mask-image: url("../img/info/bg-desc.png")
+  mask-repeat: no-repeat
+  mask-position: 0 0
+  mask-size: cover
+  background-color: $blue
+  @media screen and (max-width: 1050px)
+    mask-image: url("../img/info/bg-tab.png")
+
+  @media screen and (max-width: 600px)
+    mask-image: url("../img/info/bg-mob.png")
+  &__left
+    max-width: 345px
+    margin-top: -20px
+
+  &__right
+    max-width: 470px
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+    gap: 17px
+  &__title, &__bottom
+    color: $white
+    font-family: $font-press-start2p
+    font-size: 16px
+    text-transform: uppercase
+    letter-spacing: -.05em
+  &__bottom
+    line-height: 22px
+  &__text
+    color: $white
+    font-family: $font-favbet-text-reg
+    font-size: 16px
+    line-height: 23px
+  &__icons
+    display: flex
+    align-items: center
+    gap: 15px
+    &-cup
+      display: none
+    &-item
+      width: 26px
+      height: 26px
+
+
+.guide
+  padding: 80px 0 30px 0
+  display: flex
+  flex-direction: column
+  align-items: center
+  &__title
+    letter-spacing: -.05em
+    font-size: 34px
+    text-shadow: -1px -1px 0px #FF267E, 0px 0px 13.82px #FF267E, 1.727px 1.727px 0px #FF267E
+  &__list
+    display: flex
+    align-items: center
+    margin-top: 60px
+    &-item
+      display: flex
+      align-items: center
+  &__step
+    display: flex
+    align-items: center
+    gap: 8px
+    position: relative
+    padding: 12px 14px
+    background: url("../img/guide/item-bg.png") no-repeat 0 0/cover
+    background-size: 100% 100%
+    &-text
+      color: $black
+      font-size: 16px
+      font-family: $font-favbet-text-reg
+    &-icon
+      width: 25px
+      height: 25px
+    &-tag
+      background: $green
+      color: $blue
+      font-size: 14px
+      font-family: $font-favbet-text-reg
+      border: 1px solid $blue
+      padding: 0 8px
+      position: absolute
+      top: -8px
+      left: 14px
+
+
+.marquee
+  overflow: hidden
+  font-size: 24px
+  padding: 40px 0
+  position: relative
+
+  &__inner
+    display: flex
+    width: fit-content
+    animation: marquee 20s linear infinite
+
+  &__content
+    display: flex
+    &-item
+      white-space: nowrap
+      font-size: 72px
+      line-height: 72px
+      letter-spacing: -.05em
+      font-family: $font-press-start2p
+      text-transform: uppercase
+      display: flex
+      align-items: center
+      &::after
+        content: ""
+        display: block
+        width: .25em
+        height: .25em
+        margin: 0 .45em .1em .28em
+        background: #00008A
+      span
+        font-family: inherit
+        color: #00008A
+        &:first-child
+          color: transparent
+          -webkit-text-stroke-width: 2.57px
+          -webkit-text-stroke-color: #00008A
+        &:not(:first-child)
+          margin-left: .4em
+
+
+.results
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-direction: column
+  position: relative
+  padding-bottom: 30px
+  &__anim
+    position: relative
+    width: 150px
+    height: 80px
+    margin-bottom: 20px
+    .star
+      position: absolute
+      width: 16px
+      height: 16px
+      animation: star-blink 1.5s infinite ease-in-out
+      &--left
+        bottom: 20px
+        left: 25%
+        background: url('../img/results/star2.png') no-repeat center/contain
+      &--right
+        bottom: 30px
+        right: 25%
+        background: url('../img/results/star1.png') no-repeat center/contain
+    .confetti
+      position: absolute
+      width: 8px
+      height: 16px
+      background: url('../img/results/confetti-green.png') no-repeat center/contain
+      top: -20px
+      opacity: 0
+      left: calc(12.5% * var(--i))
+      animation: confetti-fall 2.5s linear infinite
+      animation-delay: calc(var(--delay) * 1s)
+      &:nth-child(odd)
+        background: url('../img/results/confetti-red.png') no-repeat center/contain
+    .trophy
+      width: 60px
+      height: 60px
+      background: url('../img/results/podium.png') no-repeat center/contain
+      position: absolute
+      bottom: 0px
+      left: 50%
+      transform: translateX(-50%) scale(0)
+      animation: trophy-appear 1s ease-out .5s forwards
+
+  &::before
+    content: ""
+    display: block
+    position: absolute
+    top: 49%
+    left: 50%
+    transform: translate(-50%, -50%)
+    z-index: 0
+    pointer-events: none
+    mask-image: url("../img/results/bg-desc.png")
+    mask-repeat: no-repeat
+    mask-position: 0 0
+    mask-size: cover
+    background-color: $blue
+    width: 615px
+    height: 615px
+    @media screen and (max-width: 600px)
+      mask-image: url("../img/results/bg-mob.png")
+  &__title
+    font-size: 34px
+    text-shadow: -1px -1px 0px #FF267E, 0px 0px 13.82px #FF267E, 1.727px 1.727px 0px #FF267E
+    z-index: 1
+    margin-bottom: 35px
+
+.table
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  width: 405px
+  z-index: 1
+  #tableOther
+    border: none
+    .table
+      &__row
+        &-item
+          border: none
+          &::before
+            content: none
+  &__body
+    width: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+    border-top: 1px solid $white
+    padding-top: 10px
+    .table
+      &__row
+        &:last-child
+          .table__row-item
+            &::before
+              height: 30px
+              bottom: 10px
+        &-item
+          &:nth-child(1)
+            font-family: $font-press-start2p
+          &:nth-child(4)
+            font-family: $font-favbet-text-bold
+  &__row
+    display: flex
+    width: 100%
+    align-items: center
+    position: relative
+    padding: 0 5px
+    &:first-child
+      .table__row-item
+        &:not(:last-child)
+          &::before
+            content: ""
+            width: 1px
+            height: 50px
+            position: absolute
+            bottom: 0
+            background: $white
+    &.you
+      background: $white
+      .table__row-item
+        color: $blue
+      .you
+        font-family: $font-favbet-text-reg
+        text-transform: uppercase
+        margin-left: 5px
+    &-item
+      display: flex
+      align-items: center
+      justify-content: center
+      color: $white
+      font-family: $font-suisse-intl-reg
+      font-size: 12px
+      max-height: 30px
+      height: 50px
+      &:not(:last-child)
+        border-right: 1px solid $white
+      &:nth-child(1)
+        width: 64px
+        justify-content: flex-start
+        &::before
+          left: 67px
+      &:nth-child(2)
+        width: 123px
+        &::before
+          left: 188px
+      &:nth-child(3)
+        width: 116px
+        &::before
+          left: 302.5px
+      &:nth-child(4)
+        width: 98px
+        justify-content: flex-end
+        &::after
+          content: ""
+          display: block
+          width: 25px
+          height: 25px
+          background: url("../img/guide/coin.png") no-repeat 0 0/contain
+    &.gold, &.silver, &.bronze
+      .you
+        position: absolute
+        left: -10px
+        top: 50%
+        transform: translate(-100%, -50%)
+        color: white
+      .table__row-item
+        &:nth-child(1)
+          &::after
+            content: ""
+            display: block
+            width: 20px
+            height: 22px
+            margin-left: 5px
+    &.gold
+      .table__row-item
+        &:nth-child(1)
+          &::after
+            background: url("../img/results/gold.png") no-repeat 0 0/contain
+    &.silver
+      .table__row-item
+        &:nth-child(1)
+          &::after
+            background: url("../img/results/silver.png") no-repeat 0 0/contain
+    &.bronze
+      .table__row-item
+        &:nth-child(1)
+          &::after
+            background: url("../img/results/bronze.png") no-repeat 0 0/contain
+  &__head
+    width: 100%
+    display: flex
+    align-items: center
+    .table
+      &__row
+        &:first-child
+          .table__row-item
+            &::before
+              content: none
+        &-item
+          color: rgba($white, .5)
+          font-family: $font-favbet-text-reg
+          font-size: 10px
+          &::after
+            content: none
+
+
+.bottom
+  padding: 40px 0
+  max-width: 650px
 
 // drop
 details summary::-webkit-details-marker
   display: none
 
 .drop
-  max-width: 100%
+  max-width: 605px
   width: 100%
   margin: 0 auto
   border-radius: 10px
@@ -128,8 +533,8 @@ details summary::-webkit-details-marker
     font-family: $font-suisse-intl-reg
     font-size: 16px
     cursor: pointer
-    border: 2px solid $white
-    background: rgba($black, .3)
+    background: url("../img/drop-bg.png") no-repeat 0 0/cover
+    background-size: 100% 100%
     display: flex
     align-items: center
     justify-content: space-between
@@ -140,8 +545,8 @@ details summary::-webkit-details-marker
     &::before
       content: ""
       display: block
-      min-width: 25px
-      height: 25px
+      min-width: 20px
+      height: 12px
       background: url("../img/arrow-drop.png") no-repeat 0 0/contain
       order: 2
 
@@ -251,3 +656,111 @@ body.dark
     transform: rotate(0deg)
   100%
     transform: rotate(360deg)
+
+
+
+// game
+
+.game-container
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-direction: column
+  background: transparent
+  .target.hideTarget
+    opacity: 0
+  .targetRow
+    display: flex
+    align-items: center
+    min-width: 515px
+    max-width: 515px
+    justify-content: space-between
+    margin-bottom: 15px
+    @media screen and (max-width: 1050px)
+      min-width: 315px
+      max-width: 315px
+      margin-bottom: 8px
+    &.cup
+      .target
+        width: 50px
+        height: 54px
+        background: url("../img/welcome/cup.png") no-repeat 0 0/contain
+        @media screen and (max-width: 1050px)
+          width: 31px
+          height: 33px
+    &.rocket
+      .target
+        width: 61px
+        height: 59px
+        background: url("../img/welcome/rocket.png") no-repeat 0 0/contain
+        @media screen and (max-width: 1050px)
+          width: 38px
+          height: 37px
+    &.redBall
+      .target
+        width: 44px
+        height: 44px
+        background: url("../img/welcome/redBall.png") no-repeat 0 0/contain
+        @media screen and (max-width: 1050px)
+          width: 28px
+          height: 28px
+          background: url("../img/welcome/redBall.png") no-repeat 0 0/contain
+    &.greenBall
+      .target
+        width: 44px
+        height: 44px
+        background: url("../img/welcome/greenBall.png") no-repeat 0 0/contain
+        @media screen and (max-width: 1050px)
+          width: 28px
+          height: 28px
+          background: url("../img/welcome/redBall.png") no-repeat 0 0/contain
+  .ship
+    margin-top: 95px
+    width: 59px
+    height: 45px
+    background: url("../img/welcome/ship.png") no-repeat 0 0/contain
+    @media screen and (max-width: 1050px)
+      margin-top: 125px
+      width: 37px
+      height: 28px
+
+
+@keyframes marquee
+  0%
+    transform: translateX(0%)
+  100%
+    transform: translateX(-30%)
+
+
+@keyframes star-blink
+  0%, 100%
+    opacity: 0.2
+    transform: scale(1)
+  50%
+    opacity: 1
+    transform: scale(1.2)
+
+@keyframes confetti-fall
+  0%
+    transform: translateY(0) rotate(0deg)
+    opacity: 1
+  100%
+    transform: translateY(200px) rotate(360deg)
+    opacity: 0
+
+
+@keyframes trophy-appear
+  0%
+    transform: translateX(-50%) scale(0)
+    opacity: 0
+  60%
+    transform: translateX(-50%) scale(1.2)
+    opacity: 1
+  100%
+    transform: translateX(-50%) scale(1)
+
+@keyframes opacity
+  0%
+    opacity: 0
+  100%
+    opacity: 1

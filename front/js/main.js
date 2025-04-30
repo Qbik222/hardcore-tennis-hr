@@ -205,4 +205,11 @@
 
     checkUserAuth()
 
+    document.querySelectorAll('.confetti').forEach(el => {
+        const delay = (Math.random() * 2.5).toFixed(2);
+        el.style.setProperty('--delay', delay);
+    });
+
+
+
 })();

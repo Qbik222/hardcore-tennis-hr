@@ -9,7 +9,53 @@
             .welcome__btn.btn.part-btn(data-translate="partBtn") Sudjeluj
             .welcome__btn.btn.play-btn(data-translate="playBtn") Kladi se
         .welcome__right
-            .welcome__animation
+            .game-container
+                .targetRow.cup
+                    .target
+                    .target
+                    .target
+                    .target
+                    .target
+                    .target
+                    .target
+                    .target
+                .targetRow.rocket
+                    .target
+                    .target
+                    .target
+                    .target
+                    .target
+                    .target
+                    .target.hideTarget
+                    .target
+                .targetRow.greenBall
+                    .target
+                    .target
+                    .target
+                    .target.hideTarget
+                    .target
+                    .target
+                    .target.hideTarget
+                    .target
+                .targetRow.redBall
+                    .target
+                    .target
+                    .target
+                    .target.hideTarget
+                    .target
+                    .target
+                    .target.hideTarget
+                    .target
+                .targetRow.redBall
+                    .target.hideTarget
+                    .target
+                    .target.hideTarget
+                    .target.hideTarget
+                    .target.hideTarget
+                    .target
+                    .target.hideTarget
+                    .target.hideTarget
+                .ship
     .info
         .info__left
             .info__coin
@@ -45,25 +91,29 @@
         .guide__title.title(data-translate="guideTitle") KAKO SUDJELOVATI?
         .guide__list
             .guide__list-item
-                .guide__arrow
-                    img(src="img/guide/arrow-right/png" alt="favbet")
                 .guide__step
                     .guide__step-icon
-                        img(src="img/guide/pointer/png" alt="favbet")
+                        img(src="img/guide/pointer.png" alt="favbet")
                     .guide__step-text(data-translate="stepText1") Klikni gumb “Sudjeluj”
                     .guide__step-tag(data-translate="stepTag1") Korak 1
+                .guide__arrow
+                    picture
+                        source(media="(max-width: 1050px)" srcset="img/guide/arrow-right.png")
+                        img(src="img/guide/arrow-desc.png" alt="favbet")
             .guide__list-item
                 .guide__step
                     .guide__step-icon
-                        img(src="img/guide/gamepad/png" alt="favbet")
+                        img(src="img/guide/gamepad.png" alt="favbet")
                     .guide__step-text(data-translate="stepText2") Kladi se na Roland Garros
                     .guide__step-tag(data-translate="stepTag2") Korak 2
                 .guide__arrow
-                    img(src="img/guide/arrow-left/png" alt="favbet")
+                    picture
+                        source(media="(max-width: 1050px)" srcset="img/guide/arrow-left.png")
+                        img(src="img/guide/arrow-desc.png" alt="favbet")
             .guide__list-item
                 .guide__step
                     .guide__step-icon
-                        img(src="img/guide/coin/png" alt="favbet")
+                        img(src="img/guide/coin.png" alt="favbet")
                     .guide__step-text(data-translate="stepText3") Osvoji bodove i nagrade
                     .guide__step-tag(data-translate="stepTag3") Korak 3
     .drop
@@ -74,8 +124,29 @@
                     p 1. Klikni gumb “Sudjeluj” Prijavi se na svoj Favbet račun ili se registriraj ako si novi igrač. Klikni gumb “Sudjeluj” na stranici promocije.
                     p 2. Kladi se na Roland Garros Od 25. svibnja do 8. lipnja 2025. kladi se na mečeve Roland Garrosa s minimalnim iznosom od 5 € i za svakih 5 € osvoji 1 bod. Oklade moraju biti obračunate s minimalnim tečajem 1.5 (pojedinačne) ili za kombinirane oklade s ukupnim minimalnim tečajem 3.5 (minimalno 3 događaja), bez korištenja opcija „Bez rizika“ i „Povrat”.
                     p 3. Osvoji bodove i nagrade Više bodova donosi veće šanse za osvajanje. Bodovi će se prikupljati i prikazivati u tablici „Rezultati“. Nakon završetka promocije, prvih 30 sudionika s najviše bodova osvaja vrijedne nagrade.
+    .marquee
+        .marquee__inner
+            .marquee__content
+                .marquee__content-item(data-translate="marqueText") #[span Budi] #[span u] #[span igri]
+                .marquee__content-item(data-translate="marqueText") #[span Budi] #[span u] #[span igri]
+                .marquee__content-item(data-translate="marqueText") #[span Budi] #[span u] #[span igri]
+                .marquee__content-item(data-translate="marqueText") #[span Budi] #[span u] #[span igri]
+                .marquee__content-item(data-translate="marqueText") #[span Budi] #[span u] #[span igri]
+            .marquee__content
+                .marquee__content-item(data-translate="marqueText") #[span Budi] #[span u] #[span igri]
+                .marquee__content-item(data-translate="marqueText") #[span Budi] #[span u] #[span igri]
+                .marquee__content-item(data-translate="marqueText") #[span Budi] #[span u] #[span igri]
+                .marquee__content-item(data-translate="marqueText") #[span Budi] #[span u] #[span igri]
+                .marquee__content-item(data-translate="marqueText") #[span Budi] #[span u] #[span igri]
+
     .results
-        .results__title.title(data-translate="resultsTitle")
+        .results__anim
+            .star.star--left
+            .star.star--right
+            each val, index in [1,2,3,4,5,6,7,8]
+                .confetti(style=`--i:${index}`)
+            .trophy
+        .results__title.title(data-translate="resultsTitle") Rezultati
         .table
             .table__head
                 .table__row
@@ -84,17 +155,17 @@
                     .table__row-item(data-translate="tablePoints") [ BODOVI ]
                     .table__row-item(data-translate="tablePrize") [ NAGRADA ]
             .table__body#table
-                .table__row
-                    .table__row-item 01
+                .table__row.gold.you
+                    .table__row-item 01 #[span.you(data-translate="you") ti]
                     .table__row-item 4538***
                     .table__row-item 32.9
                     .table__row-item 350 € #[span.table-coin]
-                .table__row
+                .table__row.silver
                     .table__row-item 02
                     .table__row-item 4538***
                     .table__row-item 32.9
                     .table__row-item 350 € #[span.table-coin]
-                .table__row
+                .table__row.bronze
                     .table__row-item 03
                     .table__row-item 4538***
                     .table__row-item 32.9
@@ -140,7 +211,7 @@
                     .table__row-item 4538***
                     .table__row-item 32.9
                     .table__row-item 350 € #[span.table-coin]
-                .table__row
+                .table__row.you
                     .table__row-item 39 #[span.you(data-translate="you") ti]
                     .table__row-item 4538***
                     .table__row-item 32.9
