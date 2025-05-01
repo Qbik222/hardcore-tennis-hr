@@ -211,5 +211,133 @@
     });
 
 
+    // game animation
+
+    const ship = document.querySelector('.ship');
+    const rows = [...document.querySelectorAll('.targetRow')];
+    let gameOver = false;
+    let movingInterval = null;
+
+    function getShipX() {
+        return ship.getBoundingClientRect().left + ship.offsetWidth / 2;
+    }
+
+    function getClosestTargetColIndex() {
+        const row = rows[0];
+        const targets = [...row.querySelectorAll('.target')];
+        const shipX = getShipX();
+
+        let closestIndex = 0;
+        let closestDist = Infinity;
+        targets.forEach((target, i) => {
+            const rect = target.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const dist = Math.abs(centerX - shipX);
+            if (dist < closestDist) {
+                closestDist = dist;
+                closestIndex = i;
+            }
+        });
+        return closestIndex;
+    }
+
+    function findFirstVisibleTargetInColumn(colIndex) {
+        for (let i = rows.length - 1; i >= 0; i--) {
+            const target = rows[i].querySelectorAll('.target')[colIndex];
+            if (!target.classList.contains('hideTarget')) {
+                return target;
+            }
+        }
+        return null;
+    }
+
+    function shoot() {
+        stopShip();
+
+        const colIndex = getClosestTargetColIndex();
+        const target = findFirstVisibleTargetInColumn(colIndex);
+        if (!target) return resumeShip();
+
+        const bullet = document.createElement('div');
+        bullet.className = 'bullet';
+        const shipRect = ship.getBoundingClientRect();
+        const containerRect = document.querySelector('.game-container').getBoundingClientRect();
+        const targetRect = target.getBoundingClientRect();
+
+        bullet.style.left = `${shipRect.left + ship.offsetWidth / 2 - containerRect.left - 1}px`;
+        bullet.style.bottom = `${containerRect.bottom - shipRect.top}px`;
+        bullet.style.height = `${(10 + Math.random() * 20)}px`;
+
+        document.querySelector('.game-container').appendChild(bullet);
+
+        const distance = shipRect.top - targetRect.top;
+        const duration = 500;
+
+        bullet.animate(
+            [{ transform: 'translateY(0)' }, { transform: `translateY(-${distance}px)` }],
+            { duration, easing: 'linear' }
+        );
+
+        setTimeout(() => {
+            bullet.remove();
+            target.classList.add('hideTarget');
+            checkGameOver();
+            resumeShip();
+        }, duration);
+    }
+
+    function checkGameOver() {
+        const firstRow = rows[0];
+        const anyHit = [...firstRow.querySelectorAll('.target')].some(t =>
+            t.classList.contains('hideTarget')
+        );
+
+        if (anyHit) {
+            gameOver = true;
+            document.querySelector(".game-container").insertAdjacentHTML('beforeend', '<div class="game-over">Game Over</div>');
+            setTimeout(restartGame, 5000);
+        }
+    }
+
+    function restartGame() {
+        document.querySelectorAll('.target.hideTarget').forEach(t => t.classList.remove('hideTarget'));
+        document.querySelector('.game-over')?.remove();
+        gameOver = false;
+        moveShip();
+    }
+
+    function moveShip() {
+        if (gameOver) return;
+        const container = document.querySelector('.game-container');
+        const maxX = container.offsetWidth - ship.offsetWidth;
+        let direction = Math.random() > 0.5 ? 1 : -1;
+        let x = ship.offsetLeft;
+
+        movingInterval = setInterval(() => {
+            if (gameOver) return clearInterval(movingInterval);
+
+            x += direction * 3;
+            if (x <= 0 || x >= maxX) {
+                direction *= -1;
+                x = Math.max(0, Math.min(x, maxX));
+            }
+            ship.style.left = `${x}px`;
+
+            if (Math.random() < 0.01) shoot();
+        }, 20);
+    }
+
+    function stopShip() {
+        clearInterval(movingInterval);
+    }
+
+    function resumeShip() {
+        setTimeout(moveShip, 200);
+    }
+
+    moveShip();
+
+
+
 
 })();
