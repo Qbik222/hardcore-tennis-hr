@@ -37,3 +37,125 @@
 @media screen and (max-width: 705px)
   .welcome
     max-width: 620px
+    &__title
+      font-size: 28px
+      line-height: 37px
+  .info
+    max-width: 630px
+    &__right
+      max-width: 360px
+  .drop
+    max-width: 550px
+  .bottom
+    max-width: 600px
+
+@media screen and (max-width: 600px)
+  .welcome
+    flex-direction: column
+    align-items: center
+    padding-bottom: 60px
+    &__left
+      align-items: center
+      width: 100%
+      max-width: 100%
+      z-index: 2
+      margin-top: 0
+      &::before
+        content: ""
+        display: block
+        width: 345px
+        height: 45px
+        position: absolute
+        bottom: -40px
+        left: 50%
+        transform: translate(-50%, 0)
+        background: url("../img/welcome/logo-mob.png") no-repeat 0 0/contain
+
+    &__title
+      text-align: center
+    &__right
+      z-index: 1
+      position: absolute
+      top: 85px
+      left: 50%
+      transform: translate(-50%, 0)
+    &__subtitle
+      margin-top: 220px
+  .info
+    padding: 60px 15px 37px 15px
+    flex-direction: column
+    align-items: center
+    width: 100%
+    position: relative
+    &::before
+      content: ""
+      display: block
+      max-width: 390px
+      min-width: 390px
+      height: 260px
+      mask-image: url("../img/info/bg-mob.png")
+      mask-repeat: no-repeat
+      mask-position: 0 0
+      mask-size: cover
+      background-color: $blue
+      position: absolute
+      z-index: 0
+      bottom: -15px
+      left: 50%
+      transform: translate(-50%, 0)
+      pointer-events: none
+    &__icons
+      gap: 24px
+      &-item
+        width: 41px
+        height: 41px
+      &-cup
+        display: block
+        width: 81px
+        height: 75px
+    &__title
+      text-align: center
+    &__text
+      text-align: center
+    &__right
+      align-items: center
+      z-index: 1
+    &__bottom
+      text-align: center
+    &__left
+      width: 100%
+      max-width: 100%
+      display: flex
+      align-items: center
+      justify-content: space-around
+      flex-direction: row
+    &__img
+      max-width: 85px
+    &__coin
+      width: 36px
+      height: 44px
+      &:nth-child(1)
+        animation: coin2 1s infinite linear
+      &:nth-child(2)
+        animation: coin3 1s infinite linear
+      &:nth-child(4)
+        animation: coin5 1s infinite linear
+      &:nth-child(5)
+        animation: coin6 1s infinite linear
+  .guide
+    padding: 50px 0 30px 0
+    &__title
+      text-align: center
+      font-size: 18px
+    &__list
+      margin-top: 30px
+  .drop
+    width: 95vw
+  .marquee
+    padding: 30px 0
+    &__content
+      &-item
+        font-size: 52px
+        line-height: 52px
+  .bottom
+    max-width: 95%

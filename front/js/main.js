@@ -294,7 +294,7 @@
 
         if (anyHit) {
             gameOver = true;
-            document.querySelector(".game-container").insertAdjacentHTML('beforeend', '<div class="game-over">Game Over</div>');
+            document.querySelector(".game-container").insertAdjacentHTML('beforeend', '<div class="game-over">YOU WON</div>');
             setTimeout(restartGame, 5000);
         }
     }

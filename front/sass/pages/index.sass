@@ -178,11 +178,15 @@ body
     mask-image: url("../img/info/bg-tab.png")
 
   @media screen and (max-width: 600px)
-    mask-image: url("../img/info/bg-mob.png")
+    mask-image: none
+    background: transparent
   &__left
     max-width: 345px
     margin-top: -20px
-
+  &__coin
+    display: none
+    @media screen and (max-width: 600px)
+      display: block
   &__right
     max-width: 470px
     display: flex
@@ -672,6 +676,7 @@ body.dark
   flex-direction: column
   background: transparent
   position: relative
+  pointer-events: none
   .game-over
     color: white
     font-size: 40px
@@ -815,3 +820,91 @@ body.dark
   19%, 21%, 24%, 54%, 56%
     opacity: 0.4
     text-shadow: none
+
+
+//coins animations
+
+@keyframes coin1
+  0%, 100%
+    background: url("../img/info/coin-frame1.png") no-repeat 0 0 / contain
+  16.66%
+    background: url("../img/info/coin-frame2.png") no-repeat 0 0 / contain
+  33.33%
+    background: url("../img/info/coin-frame3.png") no-repeat 0 0 / contain
+  50%
+    background: url("../img/info/coin-frame4.png") no-repeat 0 0 / contain
+  66.66%
+    background: url("../img/info/coin-frame5.png") no-repeat 0 0 / contain
+  83.33%
+    background: url("../img/info/coin-frame6.png") no-repeat 0 0 / contain
+
+@keyframes coin2
+  0%, 100%
+    background: url("../img/info/coin-frame2.png") no-repeat 0 0 / contain
+  16.66%
+    background: url("../img/info/coin-frame3.png") no-repeat 0 0 / contain
+  33.33%
+    background: url("../img/info/coin-frame4.png") no-repeat 0 0 / contain
+  50%
+    background: url("../img/info/coin-frame5.png") no-repeat 0 0 / contain
+  66.66%
+    background: url("../img/info/coin-frame6.png") no-repeat 0 0 / contain
+  83.33%
+    background: url("../img/info/coin-frame1.png") no-repeat 0 0 / contain
+
+@keyframes coin3
+  0%, 100%
+    background: url("../img/info/coin-frame3.png") no-repeat 0 0 / contain
+  16.66%
+    background: url("../img/info/coin-frame4.png") no-repeat 0 0 / contain
+  33.33%
+    background: url("../img/info/coin-frame5.png") no-repeat 0 0 / contain
+  50%
+    background: url("../img/info/coin-frame6.png") no-repeat 0 0 / contain
+  66.66%
+    background: url("../img/info/coin-frame1.png") no-repeat 0 0 / contain
+  83.33%
+    background: url("../img/info/coin-frame2.png") no-repeat 0 0 / contain
+
+@keyframes coin4
+  0%, 100%
+    background: url("../img/info/coin-frame4.png") no-repeat 0 0 / contain
+  16.66%
+    background: url("../img/info/coin-frame5.png") no-repeat 0 0 / contain
+  33.33%
+    background: url("../img/info/coin-frame6.png") no-repeat 0 0 / contain
+  50%
+    background: url("../img/info/coin-frame1.png") no-repeat 0 0 / contain
+  66.66%
+    background: url("../img/info/coin-frame2.png") no-repeat 0 0 / contain
+  83.33%
+    background: url("../img/info/coin-frame3.png") no-repeat 0 0 / contain
+
+
+@keyframes coin5
+  0%, 100%
+    background: url("../img/info/coin-frame5.png") no-repeat 0 0 / contain
+  16.66%
+    background: url("../img/info/coin-frame6.png") no-repeat 0 0 / contain
+  33.33%
+    background: url("../img/info/coin-frame1.png") no-repeat 0 0 / contain
+  50%
+    background: url("../img/info/coin-frame2.png") no-repeat 0 0 / contain
+  66.66%
+    background: url("../img/info/coin-frame3.png") no-repeat 0 0 / contain
+  83.33%
+    background: url("../img/info/coin-frame4.png") no-repeat 0 0 / contain
+
+@keyframes coin6
+  0%, 100%
+    background: url("../img/info/coin-frame6.png") no-repeat 0 0 / contain
+  16.66%
+    background: url("../img/info/coin-frame1.png") no-repeat 0 0 / contain
+  33.33%
+    background: url("../img/info/coin-frame2.png") no-repeat 0 0 / contain
+  50%
+    background: url("../img/info/coin-frame3.png") no-repeat 0 0 / contain
+  66.66%
+    background: url("../img/info/coin-frame4.png") no-repeat 0 0 / contain
+  83.33%
+    background: url("../img/info/coin-frame5.png") no-repeat 0 0 / contain
