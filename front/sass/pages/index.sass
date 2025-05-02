@@ -370,7 +370,7 @@ body
     font-size: 34px
     text-shadow: -1px -1px 0px #FF267E, 0px 0px 13.82px #FF267E, 1.727px 1.727px 0px #FF267E
     z-index: 1
-    margin-bottom: 35px
+    margin-bottom: 10px
 
 .table
   display: flex
@@ -379,6 +379,33 @@ body
   justify-content: center
   width: 405px
   z-index: 1
+  &__tabs
+    display: flex
+    align-items: center
+    justify-content: center
+    gap: 6px
+    margin-bottom: 20px
+    &-item
+      font-family: $font-suisse-intl-reg
+      display: flex
+      justify-content: center
+      align-items: center
+      background: $white
+      padding: 4px 17px
+      font-size: 16px
+      mask-image: url("../img/results/tab.png")
+      mask-repeat: no-repeat
+      mask-size: 100% 100%
+      transition: background-color .4s ease-in-out
+      &.active
+        background-color: $magenta
+      &:hover
+        background: $magenta
+        cursor: pointer
+      span
+        font-family: inherit
+        margin-right: .3em
+
   #tableOther
     border: none
     .table

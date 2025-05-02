@@ -1,6 +1,6 @@
 (function () {
 
-    const apiURL = 'https://fav-prom.com/api_your_promo'
+    const apiURL = 'https://fav-prom.com/api_hardcore_tennis'
 
     const mainPage = document.querySelector(".fav-page"),
         unauthMsgs = document.querySelectorAll('.unauth-msg'),
@@ -11,18 +11,27 @@
     const hrLeng = document.querySelector('#hrLeng');
     const enLeng = document.querySelector('#enLeng');
 
+    const toggleClasses = (elements, className) => elements.forEach(el => el.classList.toggle(`${className}`));
+    const toggleTranslates = (elements, dataAttr) => elements.forEach(el => {
+        el.setAttribute('data-translate', `${dataAttr}`)
+        el.innerHTML = i18nData[dataAttr] || '*----NEED TO BE TRANSLATED----*   key:  ' + dataAttr;
+        el.removeAttribute('data-translate');
+    });
+
     let locale = "en"
+
+    let loaderBtn = false
 
     if (hrLeng) locale = 'hr';
     if (enLeng) locale = 'en';
 
-    let debug = true
+    let debug = false
 
     if (debug) hideLoader()
 
     let i18nData = {};
-    const translateState = true;
-    let userId = null;
+    const translateState = false;
+    let userId = 100300268;
 
     const request = function (link, extraOptions) {
         return fetch(apiURL + link, {
@@ -38,15 +47,15 @@
             })
             .catch(err => {
                 console.error('API request failed:', err);
-
-                reportError(err);
-
-                document.querySelector('.fav-page').style.display = 'none';
-                if (window.location.href.startsWith("https://www.favbet.hr/")) {
-                    window.location.href = '/promocije/promocija/stub/';
-                } else {
-                    window.location.href = '/promos/promo/stub/';
-                }
+                //
+                // reportError(err);
+                //
+                // document.querySelector('.fav-page').style.display = 'none';
+                // if (window.location.href.startsWith("https://www.favbet.hr/")) {
+                //     window.location.href = '/promocije/promocija/stub/';
+                // } else {
+                //     window.location.href = '/promos/promo/stub/';
+                // }
 
                 return Promise.reject(err);
             });
@@ -76,6 +85,7 @@
         function quickCheckAndRender() {
             // сюди всі функції які відповідають за рендер ui промки
             checkUserAuth();
+            participateBtns.forEach(btn => btn.addEventListener('click', participate));
         }
 
         const waitForUserId = new Promise((resolve) => {
@@ -94,16 +104,21 @@
     }
 
     function loadTranslations() {
-        return fetch(`${apiURL}/translates/${locale}`).then(res => res.json())
+        return fetch(`${apiURL}/new-translates/${locale}`).then(res => res.json())
             .then(json => {
                 i18nData = json;
                 translate();
 
                 var mutationObserver = new MutationObserver(function (mutations) {
+                    const shouldSkip = mutations.every(mutation => {
+                        return mutation.target.closest('.game-container');
+                    });
+
+                    if (shouldSkip) return;
+
                     translate();
                 });
-
-                mutationObserver.observe(document.getElementById("yourPromoId"), {
+                mutationObserver.observe(document.getElementById("hardcoreTennis"), {
                     childList: true,
                     subtree: true
                 });
@@ -145,6 +160,34 @@
                 return Promise.resolve(false);
             }
         }, loadTime)
+    }
+
+    function participate() {
+        if (!userId) {
+            return;
+        }
+        const params = { userid: userId };
+        fetch(apiURL + '/user/', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(params)
+        }).then(res => res.json())
+            .then(res => {
+                loaderBtn = true
+                toggleClasses(participateBtns, "loader")
+                toggleTranslates(participateBtns, "loader")
+                setTimeout(() =>{
+                    toggleTranslates(participateBtns, "loader_ready")
+                    toggleClasses(participateBtns, "done")
+                }, 500)
+                setTimeout(()=>{
+                    checkUserAuth()
+                }, 1000)
+
+            });
     }
 
     function reportError(err) {
@@ -202,8 +245,6 @@
         }
         return i18nData[key] || defaultVal || '*----NEED TO BE TRANSLATED----*   key:  ' + key;
     }
-
-    checkUserAuth()
 
     document.querySelectorAll('.confetti').forEach(el => {
         const delay = (Math.random() * 2.5).toFixed(2);
@@ -338,6 +379,6 @@
     moveShip();
 
 
-
+    loadTranslations().then(init)
 
 })();
