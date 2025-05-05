@@ -159,3 +159,62 @@
         line-height: 52px
   .bottom
     max-width: 95%
+    width: 360px
+  .results
+    &__title
+      font-size: 18px
+    &__btn
+      margin-top: 5px
+  .table
+    width: 300px
+    &__tabs
+      margin-bottom: 10px
+    &__row
+      &-item
+        &:nth-child(1)
+          width: 56px
+          &::before
+            left: 57px
+        &:nth-child(2)
+          width: 82px
+          &::before
+            left: 136px
+        &:nth-child(3)
+          width: 80px
+          &::before
+            left: 214px
+        &:nth-child(4)
+          width: 83px
+
+@media screen and (max-width: 360px)
+  .welcome
+    &__title
+      font-size: 24px
+      line-height: 33px
+  .info
+    &__icons
+      &-item
+        width: 35px
+        height: 35px
+      &-cup
+        height: 60px
+        width: 70px
+  .guide
+    padding: 50px 10px 30px 10px
+    &__step
+      &-text
+        font-size: 13px
+  .table
+    transform: scale(.9)
+    margin: -20px 0
+    &__row
+      &:first-child
+        .table__row-item
+          &:nth-child(1)
+            &:before
+              left: 58px
+          &:nth-child(2)
+            &:before
+              left: 137px
+          &:nth-child(3)
+          &:nth-child(4)

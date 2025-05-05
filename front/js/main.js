@@ -126,8 +126,6 @@
             });
     }
 
-    // loadTranslations().then(init)
-
     function checkUserAuth() {
         let loadTime = 200;
         setTimeout(() =>{
@@ -182,6 +180,7 @@
                 setTimeout(() =>{
                     toggleTranslates(participateBtns, "loader_ready")
                     toggleClasses(participateBtns, "done")
+                    toggleClasses(participateBtns, "loader")
                 }, 500)
                 setTimeout(()=>{
                     checkUserAuth()
@@ -237,13 +236,6 @@
             element.classList.remove(baseCssClass + lang);
         }
         element.classList.add(baseCssClass + locale);
-    }
-
-    function translateKey(key, defaultVal) {
-        if (!key) {
-            return;
-        }
-        return i18nData[key] || defaultVal || '*----NEED TO BE TRANSLATED----*   key:  ' + key;
     }
 
     document.querySelectorAll('.confetti').forEach(el => {
@@ -377,7 +369,6 @@
     }
 
     moveShip();
-
 
     loadTranslations().then(init)
 
