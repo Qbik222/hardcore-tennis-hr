@@ -31,8 +31,7 @@
 
     let i18nData = {};
     const translateState = false;
-    let userId = 100300268;
-
+    let userId = Number(sessionStorage.getItem("userId")) ?? null
     const request = function (link, extraOptions) {
         return fetch(apiURL + link, {
             headers: {
@@ -70,8 +69,8 @@
 
     async function init() {
         let attempts = 0;
-        const maxAttempts = 50;
-        const attemptInterval = 200;
+        const maxAttempts = 20;
+        const attemptInterval = 50;
 
         function tryDetectUserId() {
             if (window.store) {
@@ -83,7 +82,6 @@
         }
 
         function quickCheckAndRender() {
-            // сюди всі функції які відповідають за рендер ui промки
             checkUserAuth();
             participateBtns.forEach(btn => btn.addEventListener('click', participate));
         }
@@ -371,5 +369,40 @@
     moveShip();
 
     loadTranslations().then(init)
+
+
+    //test
+    // TEST
+    document.querySelector('.dark-btn').addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+    });
+
+    const lngBtn = document.querySelector(".lng-btn")
+
+    lngBtn.addEventListener("click", () => {
+        if (sessionStorage.getItem("locale")) {
+            sessionStorage.removeItem("locale");
+        } else {
+            sessionStorage.setItem("locale", "en");
+        }
+        window.location.reload();
+    });
+
+    const authBtn = document.querySelector(".auth-btn")
+
+    authBtn.addEventListener("click", () =>{
+        if(userId){
+            sessionStorage.removeItem("userId")
+        }else{
+            sessionStorage.setItem("userId", "100300268")
+        }
+        window.location.reload()
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelector(".menu-btn")?.addEventListener("click", () => {
+            document.querySelector(".menu-test")?.classList.toggle("hide");
+        });
+    });
 
 })();
