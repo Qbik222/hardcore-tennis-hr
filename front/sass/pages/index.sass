@@ -419,8 +419,9 @@ body
   display: flex
   flex-direction: column
   align-items: center
-  justify-content: center
+  justify-content: flex-start
   width: 405px
+  min-height: 440px
   z-index: 1
   &__tabs
     display: flex
@@ -484,6 +485,7 @@ body
     padding: 0 5px
     &:first-child
       .table__row-item
+        border: none
         &:not(:last-child)
           &::before
             content: ""
@@ -533,7 +535,7 @@ body
           width: 25px
           height: 25px
           background: url("../img/guide/coin.png") no-repeat 0 0/contain
-    &.gold, &.silver, &.bronze
+    &.place1, &.place2, &.place3
       .you
         position: absolute
         left: -10px
@@ -548,17 +550,17 @@ body
             width: 20px
             height: 22px
             margin-left: 5px
-    &.gold
+    &.place1
       .table__row-item
         &:nth-child(1)
           &::after
             background: url("../img/results/gold.png") no-repeat 0 0/contain
-    &.silver
+    &.place2
       .table__row-item
         &:nth-child(1)
           &::after
             background: url("../img/results/silver.png") no-repeat 0 0/contain
-    &.bronze
+    &.place3
       .table__row-item
         &:nth-child(1)
           &::after
@@ -571,6 +573,7 @@ body
       &__row
         &:first-child
           .table__row-item
+            border-right: 1px solid $white
             &::before
               content: none
         &-item

@@ -2,11 +2,51 @@
 
     const apiURL = 'https://fav-prom.com/api_hardcore_tennis'
 
+    const getActiveWeek = (promoStartDate, weekDuration) => {
+        const currentDate = new Date();
+        let weekDates = [];
+
+        const Day = 24 * 60 * 60 * 1000;
+        const Week = weekDuration * Day;
+
+        const formatDate = (date) =>
+            `${date.getDate().toString().padStart(2, "0")}.${(date.getMonth() + 1).toString().padStart(2, "0")}`;
+
+        const calculateWeekPeriod = (weekIndex) => {
+            const baseStart = promoStartDate.getTime();
+            const start = new Date(baseStart + weekIndex * Week);
+            let end = new Date(start.getTime() + (weekDuration * Day - 1));
+            return { start, end };
+        };
+
+        let activeWeekIndex = null;
+
+        // Перевірка поточного тижня
+        for (let i = 0; i < 10; i++) { // Обмежуємо 10 тижнями (якщо потрібно більше, просто змініть лічильник)
+            const { start, end } = calculateWeekPeriod(i);
+            if (currentDate >= start && currentDate <= end) {
+                activeWeekIndex = i + 1;
+                break;
+            }
+        }
+
+        return activeWeekIndex;
+    };
+
+    const promoStartDate = new Date("2025-05-05T00:00:00");
+    const weekDuration = 10;
+
+    const activeWeek = getActiveWeek(promoStartDate, weekDuration) || 1;
+
+
     const mainPage = document.querySelector(".fav-page"),
         unauthMsgs = document.querySelectorAll('.unauth-msg'),
         participateBtns = document.querySelectorAll('.part-btn'),
         redirectBtns = document.querySelectorAll('.play-btn'),
-        loader = document.querySelector(".spinner-overlay")
+        loader = document.querySelector(".spinner-overlay"),
+        resultsTable = document.querySelector('#table'),
+        resultsTableOther = document.querySelector('#tableOther'),
+        tableTabs = document.querySelectorAll('.table__tabs-item')
 
     const hrLeng = document.querySelector('#hrLeng');
     const enLeng = document.querySelector('#enLeng');
@@ -25,7 +65,7 @@
     if (hrLeng) locale = 'hr';
     if (enLeng) locale = 'en';
 
-    let debug = false
+    let debug = true
 
     if (debug) hideLoader()
 
@@ -83,7 +123,21 @@
 
         function quickCheckAndRender() {
             checkUserAuth();
+            moveShip();
+            renderUsers(activeWeek)
             participateBtns.forEach(btn => btn.addEventListener('click', participate));
+
+            document.addEventListener("click", e =>{
+               if(e.target.closest(".table__tabs-item")){
+                   tableTabs.forEach(tab =>{
+                       tab.classList.remove("active");
+                   })
+                   let tabWeek = e.target.closest(".table__tabs-item").getAttribute("data-week");
+                   e.target.closest(".table__tabs-item").classList.add("active");
+                   renderUsers(tabWeek)
+               }
+            })
+
         }
 
         const waitForUserId = new Promise((resolve) => {
@@ -106,12 +160,10 @@
             .then(json => {
                 i18nData = json;
                 translate();
-
                 var mutationObserver = new MutationObserver(function (mutations) {
                     const shouldSkip = mutations.every(mutation => {
-                        return mutation.target.closest('.game-container');
+                        return mutation.target.closest('.game-container') || mutation.target.closest('.table');
                     });
-
                     if (shouldSkip) return;
 
                     translate();
@@ -120,7 +172,6 @@
                     childList: true,
                     subtree: true
                 });
-
             });
     }
 
@@ -210,6 +261,7 @@
         if (elems && elems.length) {
             if(translateState){
                 elems.forEach(elem => {
+                    console.log("key")
                     const key = elem.getAttribute('data-translate');
                     elem.innerHTML = i18nData[key] || '*----NEED TO BE TRANSLATED----*   key:  ' + key;
                     if (i18nData[key]) {
@@ -224,6 +276,9 @@
             mainPage.classList.add('en');
         }
         refreshLocalizedClass();
+
+
+
     }
 
     function refreshLocalizedClass(element, baseCssClass) {
@@ -366,12 +421,110 @@
         setTimeout(moveShip, 200);
     }
 
-    moveShip();
+
+    function renderUsers(week) {
+        request(`/users/${week}`)
+            .then(data => {
+                const users = data;
+                populateUsersTable(users, userId, week);
+            });
+    }
+
+    function populateUsersTable(users, currentUserId, week) {
+        resultsTable.innerHTML = '';
+        resultsTableOther.innerHTML = '';
+        if (!users?.length) return;
+        const currentUser = users.find(user => user.userid === currentUserId);
+        const topUsers = users.slice(0, 10);
+        const isTopCurrentUser = currentUser && topUsers.some(user => user.userid === currentUserId);
+        topUsers.forEach(user => {
+            displayUser(user, user.userid === currentUserId, resultsTable, topUsers, isTopCurrentUser, week);
+        });
+        if (!isTopCurrentUser && currentUser) {
+            displayUser(currentUser, true, resultsTableOther, users, false, week);
+        }
+    }
+
+    function displayUser(user, isCurrentUser, table, users, isTopCurrentUser, week) {
+        const renderRow = (userData, options = {}) => {
+            const { highlight = false, neighbor = false } = options;
+            const userRow = document.createElement('div');
+            userRow.classList.add('table__row');
+
+            const userPlace = users.indexOf(userData) + 1;
+            const prizeKey = debug ? null : getPrizeTranslationKey(userPlace, week);
+
+            if (userPlace <= 3) {
+                userRow.classList.add(`place${userPlace}`);
+            }
+
+            if (highlight) {
+                userRow.classList.add('_your');
+            } else if (neighbor) {
+                userRow.classList.add('_neighbor');
+            }
+
+            userRow.innerHTML = `
+            <div class="table__row-item">
+                ${userPlace < 10 ? '0' + userPlace : userPlace}
+            </div>
+            <div class="table__row-item">
+                ${highlight ? userData.userid : maskUserId(userData.userid)}
+            </div>
+            <div class="table__row-item">
+                ${userData.points}
+            </div>
+            <div class="table__row-item">
+                ${prizeKey ? translateKey(prizeKey) : ' - '}
+            </div>
+        `;
+
+            table.append(userRow);
+        };
+        if (isCurrentUser && !isTopCurrentUser) {
+            const index = users.indexOf(user);
+            if (users[index - 1]) {
+                renderRow(users[index - 1], { neighbor: true });
+            }
+            renderRow(user, { highlight: true });
+            if (users[index + 1]) {
+                renderRow(users[index + 1], { neighbor: true });
+            }
+        } else {
+            renderRow(user);
+        }
+    }
+
+    function translateKey(key, defaultValue) {
+        if (!key) {
+            return;
+        }
+        let needKey = debug ? key : `*----NEED TO BE TRANSLATED----* key: ${key}`
+
+        defaultValue =  needKey || key;
+        return i18nData[key] || defaultValue;
+    }
+
+    function maskUserId(userId) {
+        return "**" + userId.toString().slice(2);
+    }
+
+    function getPrizeTranslationKey(place, week) {
+        if (place <= 3) return `prize_${week}-${place}`;
+        if (place <= 10) return `prize_${week}-4-10`;
+        if (place <= 25) return `prize_${week}-11-25`;
+        if (place <= 50) return `prize_${week}-26-50`;
+        if (place <= 75) return `prize_${week}-51-75`;
+        if (place <= 100) return `prize_${week}-76-100`;
+        if (place <= 125) return `prize_${week}-101-125`;
+        if (place <= 150) return `prize_${week}-126-150`;
+        if (place <= 175) return `prize_${week}-151-175`;
+        if (place <= 200) return `prize_${week}-176-200`;
+    }
 
     loadTranslations().then(init)
 
 
-    //test
     // TEST
     document.querySelector('.dark-btn').addEventListener('click', () => {
         document.body.classList.toggle('dark');
@@ -394,7 +547,7 @@
         if(userId){
             sessionStorage.removeItem("userId")
         }else{
-            sessionStorage.setItem("userId", "100300268")
+            sessionStorage.setItem("userId", "11111222")
         }
         window.location.reload()
     });
