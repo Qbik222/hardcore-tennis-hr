@@ -86,15 +86,15 @@
             })
             .catch(err => {
                 console.error('API request failed:', err);
-                //
-                // reportError(err);
-                //
-                // document.querySelector('.fav-page').style.display = 'none';
-                // if (window.location.href.startsWith("https://www.favbet.hr/")) {
-                //     window.location.href = '/promocije/promocija/stub/';
-                // } else {
-                //     window.location.href = '/promos/promo/stub/';
-                // }
+
+                reportError(err);
+
+                document.querySelector('.fav-page').style.display = 'none';
+                if (window.location.href.startsWith("https://www.favbet.hr/")) {
+                    window.location.href = '/promocije/promocija/stub/';
+                } else {
+                    window.location.href = '/promos/promo/stub/';
+                }
 
                 return Promise.reject(err);
             });
@@ -156,7 +156,7 @@
     }
 
     function loadTranslations() {
-        return fetch(`${apiURL}/new-translates/${locale}`).then(res => res.json())
+        return request(`/new-translates/${locale}`)
             .then(json => {
                 i18nData = json;
                 translate();
