@@ -58,19 +58,19 @@
         el.removeAttribute('data-translate');
     });
 
-    let locale = "en"
+    let locale = sessionStorage.getItem("locale") || "en"
 
     let loaderBtn = false
 
     if (hrLeng) locale = 'hr';
     if (enLeng) locale = 'en';
 
-    let debug = true
+    let debug = false
 
     if (debug) hideLoader()
 
     let i18nData = {};
-    const translateState = false;
+    const translateState = true;
     let userId = Number(sessionStorage.getItem("userId")) ?? null
     const request = function (link, extraOptions) {
         return fetch(apiURL + link, {
@@ -435,8 +435,12 @@
         resultsTableOther.innerHTML = '';
         if (!users?.length) return;
         const currentUser = users.find(user => user.userid === currentUserId);
-        const topUsers = users.slice(0, 10);
-        const isTopCurrentUser = currentUser && topUsers.some(user => user.userid === currentUserId);
+        const isTopCurrentUser = currentUser && users.slice(0, 10).some(user => user.userid === currentUserId);
+
+        const topUsersLength = !userId || isTopCurrentUser  ? 13 : 10;
+
+        const topUsers = users.slice(0, topUsersLength);
+
         topUsers.forEach(user => {
             displayUser(user, user.userid === currentUserId, resultsTable, topUsers, isTopCurrentUser, week);
         });
@@ -458,8 +462,8 @@
                 userRow.classList.add(`place${userPlace}`);
             }
 
-            if (highlight) {
-                userRow.classList.add('_your');
+            if (highlight || isCurrentUser && !neighbor) {
+                userRow.classList.add('you');
             } else if (neighbor) {
                 userRow.classList.add('_neighbor');
             }
@@ -467,9 +471,10 @@
             userRow.innerHTML = `
             <div class="table__row-item">
                 ${userPlace < 10 ? '0' + userPlace : userPlace}
+                ${isCurrentUser && !neighbor ? '<span class="you">' + translateKey("you") + '</span>' : ''}
             </div>
             <div class="table__row-item">
-                ${highlight ? userData.userid : maskUserId(userData.userid)}
+                ${isCurrentUser && !neighbor ? userData.userid : maskUserId(userData.userid)}
             </div>
             <div class="table__row-item">
                 ${userData.points}
@@ -510,16 +515,10 @@
     }
 
     function getPrizeTranslationKey(place, week) {
-        if (place <= 3) return `prize_${week}-${place}`;
-        if (place <= 10) return `prize_${week}-4-10`;
-        if (place <= 25) return `prize_${week}-11-25`;
-        if (place <= 50) return `prize_${week}-26-50`;
-        if (place <= 75) return `prize_${week}-51-75`;
-        if (place <= 100) return `prize_${week}-76-100`;
-        if (place <= 125) return `prize_${week}-101-125`;
-        if (place <= 150) return `prize_${week}-126-150`;
-        if (place <= 175) return `prize_${week}-151-175`;
-        if (place <= 200) return `prize_${week}-176-200`;
+        if (place <= 5) return `prize_${place}`;
+        if (place <= 10 && place >= 6) return `prize_6-10`;
+        if (place <= 20 && place >= 11) return `prize_11-20`;
+        if (place <= 30 && place >= 21) return `prize_21-30`;
     }
 
     loadTranslations().then(init)
@@ -536,7 +535,7 @@
         if (sessionStorage.getItem("locale")) {
             sessionStorage.removeItem("locale");
         } else {
-            sessionStorage.setItem("locale", "en");
+            sessionStorage.setItem("locale", "hr");
         }
         window.location.reload();
     });

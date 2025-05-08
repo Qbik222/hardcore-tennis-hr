@@ -390,9 +390,9 @@ body
     content: ""
     display: block
     position: absolute
-    top: 49%
+    top: 50px
     left: 50%
-    transform: translate(-50%, -50%)
+    transform: translate(-50%, 0)
     z-index: 0
     pointer-events: none
     mask-image: url("../img/results/bg-desc.png")
@@ -408,7 +408,7 @@ body
       width: 360px
       height: 625px
       left: 47%
-      top: 50%
+      top: 20px
   &__title
     font-size: 34px
     text-shadow: -1px -1px 0px #FF267E, 0px 0px 13.82px #FF267E, 1.727px 1.727px 0px #FF267E
@@ -525,7 +525,7 @@ body
       &:nth-child(3)
         width: 116px
         &::before
-          left: 302.5px
+          left: 302px
       &:nth-child(4)
         width: 98px
         justify-content: flex-end
@@ -538,7 +538,7 @@ body
     &.place1, &.place2, &.place3
       .you
         position: absolute
-        left: -10px
+        left: -7px
         top: 50%
         transform: translate(-100%, -50%)
         color: white
@@ -576,6 +576,8 @@ body
             border-right: 1px solid $white
             &::before
               content: none
+            &:last-child
+              border: none
         &-item
           color: rgba($white, .5)
           font-family: $font-favbet-text-reg
@@ -684,14 +686,6 @@ details summary::-webkit-details-marker
     margin: 0 4px 2px 0
 
 //en
-
-.fav-page.en
-  picture, img
-    display: block !important
-    &.hr
-      display: none !important
-    &.en
-      display: block !important
 
 // dark
 body.dark
