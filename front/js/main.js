@@ -522,29 +522,42 @@
     }
 
     function animateMarquee(element) {
-        let start = null;
-        const duration = 30000;
-        const distancePx = -element.offsetWidth * 0.3; // 30% від ширини елемента
+        const distancePx = -element.offsetWidth * 0.3;
 
-        function step(timestamp) {
-            if (!start) start = timestamp;
-            const elapsed = timestamp - start;
-
-            const progress = Math.min(elapsed / duration, 1);
-            const translateX = progress * distancePx;
-
-            element.style.transform = `translateX(${translateX}px)`;
-
-            if (progress < 1) {
-                requestAnimationFrame(step);
-            } else {
-                start = null;
-                requestAnimationFrame(step);
-            }
-        }
-
-        requestAnimationFrame(step);
+        element.animate([
+            { transform: 'translateX(0)' },
+            { transform: `translateX(${distancePx}px)` }
+        ], {
+            duration: 100000,
+            easing: 'linear',
+            iterations: Infinity
+        });
     }
+
+    // function animateMarquee(element) {
+    //     let start = null;
+    //     const duration = 30000;
+    //     const distancePx = -element.offsetWidth * 0.3; // 30% від ширини елемента
+    //
+    //     function step(timestamp) {
+    //         if (!start) start = timestamp;
+    //         const elapsed = timestamp - start;
+    //
+    //         const progress = Math.min(elapsed / duration, 1);
+    //         const translateX = progress * distancePx;
+    //
+    //         element.style.transform = `translateX(${translateX}px)`;
+    //
+    //         if (progress < 1) {
+    //             requestAnimationFrame(step);
+    //         } else {
+    //             start = null;
+    //             requestAnimationFrame(step);
+    //         }
+    //     }
+    //
+    //     requestAnimationFrame(step);
+    // }
 
     loadTranslations().then(init)
 
