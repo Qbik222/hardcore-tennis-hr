@@ -528,7 +528,7 @@
             { transform: 'translateX(0)' },
             { transform: `translateX(${distancePx}px)` }
         ], {
-            duration: 100000,
+            duration: 40000,
             easing: 'linear',
             iterations: Infinity
         });
