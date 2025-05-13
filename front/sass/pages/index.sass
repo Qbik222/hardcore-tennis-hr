@@ -312,14 +312,12 @@ body
 
 
 .marquee
-  min-width: 11938px
-  max-width: 11938px
   overflow: hidden
   font-size: 24px
   padding: 40px 0
   position: relative
-  animation: marquee 30s linear infinite forwards
   display: flex
+  transition: transform .1s ease
   align-items: center
   justify-content: flex-start
 
@@ -855,7 +853,7 @@ body.dark
   0%
     transform: translateX(0%)
   100%
-    transform: translateX(-3582px)
+    transform: translateX(-30%)
 
 
 @keyframes star-blink

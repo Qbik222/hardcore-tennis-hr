@@ -124,6 +124,7 @@
         function quickCheckAndRender() {
             checkUserAuth();
             moveShip();
+            animateMarquee(document.querySelector(".marquee"))
             renderUsers(activeWeek)
             participateBtns.forEach(btn => btn.addEventListener('click', participate));
 
@@ -421,7 +422,6 @@
         setTimeout(moveShip, 200);
     }
 
-
     function renderUsers(week) {
         request(`/users/${week}`)
             .then(data => {
@@ -519,6 +519,31 @@
         if (place <= 10 && place >= 6) return `prize_6-10`;
         if (place <= 20 && place >= 11) return `prize_11-20`;
         if (place <= 30 && place >= 21) return `prize_21-30`;
+    }
+
+    function animateMarquee(element) {
+        let start = null;
+        const duration = 30000;
+        const distancePx = -element.offsetWidth * 0.3; // 30% від ширини елемента
+
+        function step(timestamp) {
+            if (!start) start = timestamp;
+            const elapsed = timestamp - start;
+
+            const progress = Math.min(elapsed / duration, 1);
+            const translateX = progress * distancePx;
+
+            element.style.transform = `translateX(${translateX}px)`;
+
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else {
+                start = null;
+                requestAnimationFrame(step);
+            }
+        }
+
+        requestAnimationFrame(step);
     }
 
     loadTranslations().then(init)
